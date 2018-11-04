@@ -2,7 +2,7 @@ package com.kaloglu.githubchallenge.injection.module
 
 import com.kaloglu.githubchallenge.injection.scopes.PerActivity
 import com.kaloglu.githubchallenge.mobileui.main.MainActivity
-import com.kaloglu.githubchallenge.injection.main.MainActivityModule
+import com.kaloglu.githubchallenge.injection.module.main.MainModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,7 +10,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @PerActivity
-    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    @ContributesAndroidInjector(modules = [MainModule::class])
     abstract fun contributesRepoListActivity(): MainActivity
 
 }

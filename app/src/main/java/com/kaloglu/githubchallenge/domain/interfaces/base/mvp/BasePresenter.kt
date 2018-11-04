@@ -1,4 +1,4 @@
-package com.kaloglu.githubchallenge.mobileui.base.mvp
+package com.kaloglu.githubchallenge.domain.interfaces.base.mvp
 
 import android.support.annotation.UiThread
 

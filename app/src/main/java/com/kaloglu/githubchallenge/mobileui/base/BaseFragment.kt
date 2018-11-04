@@ -8,11 +8,20 @@ import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment : DaggerFragment() {
 
+    /**
+     * Get fragment's UI content layout resource id.
+     *
+     * @return The fragment's root view's resource id
+     */
+    protected abstract val resourceLayoutId: Int
+
+    val fragmentTag = this.javaClass.simpleName
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflateView(inflater, container)
 
     open fun inflateView(inflater: LayoutInflater, container: ViewGroup?): View =
-            inflater.inflate(getResourceLayoutId(), container, false)
+            inflater.inflate(resourceLayoutId, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,11 +29,13 @@ abstract class BaseFragment : DaggerFragment() {
     }
 
     /**
-     * Get fragment's UI content layout resource id.
+     * Finds and returns the frame layout's id which holds the fragment.
      *
-     * @return The fragment's root view's resource id
+     * @return id as int
      */
-    protected abstract fun getResourceLayoutId(): Int
+    fun getContainerFrameLayoutId(): Int? {
+        return (view?.parent as ViewGroup).id
+    }
 
     /**
      * Initialize UI content elements.
@@ -32,14 +43,5 @@ abstract class BaseFragment : DaggerFragment() {
      * @param rootView The fragment's root view
      */
     protected abstract fun initUserInterface(rootView: View)
-
-    /**
-     * Finds and returns the frame layout's id which holds the fragment.
-     *
-     * @return id as int
-     */
-    fun getContainerFrameLayoutId() = (view?.parent as ViewGroup).id
-
-    fun getFragmentTag() = this.javaClass.simpleName
 
 }

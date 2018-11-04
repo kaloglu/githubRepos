@@ -1,6 +1,8 @@
 package com.kaloglu.githubchallenge.mobileui.base.mvp
 
 import android.support.annotation.CallSuper
+import com.kaloglu.githubchallenge.domain.interfaces.base.mvp.BasePresenter
+import com.kaloglu.githubchallenge.domain.interfaces.base.mvp.BaseView
 import java.lang.ref.WeakReference
 
 abstract class BaseAbstractPresenter<V : BaseView> : BasePresenter<V> {

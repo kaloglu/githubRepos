@@ -6,6 +6,28 @@ import dagger.android.support.DaggerAppCompatActivity
 
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
+    /**
+     * Method to get activity's UI content layout resource id.
+     * if overwritten [getBaseFrameLayoutId][.getBaseFrameLayoutId] must also be implemented.
+     *
+     * @return The activity's content's resource id
+     */
+    protected open val contentResourceId = R.layout.activity_base
+
+    /**
+     * Method to get activity's UI content frame layout resource id.
+     *
+     * @return The activity's frame layout resource id
+     */
+    protected open val baseFrameLayoutId = R.id.activity_base_fragment_container
+
+    /**
+     * Get initial fragment instance.
+     *
+     * @return Fragment
+     */
+    protected abstract val containedFragment: BaseFragment?
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -15,52 +37,20 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
         if (savedInstanceState == null) {
 
-            if (containedFragment != null) {
-
-                val tag = containedFragment!!.getFragmentTag()
-
+            containedFragment?.run {
                 supportFragmentManager.beginTransaction()
-                        .add(baseFrameLayoutId, containedFragment, tag)
+                        .add(baseFrameLayoutId, this, fragmentTag)
                         .commit()
             }
         }
     }
 
-    //Bu method'un ismi değişebilir
     protected open fun setContentView() {
         setContentView(contentResourceId)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     /**
      * Initialize UI content elements.
      */
     protected abstract fun initUserInterface()
-
-    /**
-     * Method to get activity's UI content layout resource id.
-     * if overwritten [getBaseFrameLayoutId][.getBaseFrameLayoutId] must also be implemented.
-     *
-     * @return The activity's content's resource id
-     */
-    protected open val contentResourceId: Int
-        get() = R.layout.activity_base
-
-    /**
-     * Method to get activity's UI content frame layout resource id.
-     *
-     * @return The activity's frame layout resource id
-     */
-    protected open val baseFrameLayoutId: Int
-        get() = R.id.activity_base_fragment_container
-
-    /**
-     * Get initial fragment instance.
-     *
-     * @return Fragment
-     */
-    protected abstract val containedFragment: BaseFragment?
 }

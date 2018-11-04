@@ -1,6 +1,8 @@
 package com.kaloglu.githubchallenge.mobileui.base.mvp
 
 import android.os.Bundle
+import com.kaloglu.githubchallenge.domain.interfaces.base.mvp.BasePresenter
+import com.kaloglu.githubchallenge.domain.interfaces.base.mvp.BaseView
 import com.kaloglu.githubchallenge.mobileui.base.BaseActivity
 import javax.inject.Inject
 

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.kaloglu.githubchallenge.R
-import com.kaloglu.githubchallenge.domain.main.MainActivityPresenter
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import kotlinx.android.synthetic.main.repo_list_content.view.*
 
