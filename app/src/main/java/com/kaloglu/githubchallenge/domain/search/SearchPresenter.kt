@@ -1,8 +1,10 @@
 package com.kaloglu.githubchallenge.domain.search
 
 import android.arch.lifecycle.Observer
+import android.os.Bundle
 import com.kaloglu.githubchallenge.domain.RepoRepository
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
+import com.kaloglu.githubchallenge.mobileui.DetailFragment
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseAbstractPresenter
 import com.kaloglu.githubchallenge.navigation.FragmentNavigator
 import com.kaloglu.githubchallenge.viewobjects.Repo
@@ -12,17 +14,16 @@ class SearchPresenter
 @Inject constructor(
         private val repository: RepoRepository,
         private val fragmentNavigator: FragmentNavigator
-)
-    : BaseAbstractPresenter<SearchContract.View>(), SearchContract.Presenter {
+) : BaseAbstractPresenter<SearchContract.View>(), SearchContract.Presenter {
 
     override fun showDetailFragment(item: Repo) {
-//        fragmentNavigator.showFragment(
-//                DetailFragment().apply {
-//                    arguments = Bundle().apply {
-//                        putString(DetailFragment.ARG_ITEM_ID, item.id.toString())
-//                    }
-//                }
-//        )
+        fragmentNavigator.showFragment(
+                DetailFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(DetailFragment.ARG_ITEM_ID, item.id.toString())
+                    }
+                }
+        )
     }
 
     override fun repoSearch(query: String): Boolean {
