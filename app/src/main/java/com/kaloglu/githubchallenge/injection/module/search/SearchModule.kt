@@ -4,6 +4,7 @@ import com.kaloglu.githubchallenge.domain.RepoRepository
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
 import com.kaloglu.githubchallenge.domain.search.SearchPresenter
 import com.kaloglu.githubchallenge.injection.scopes.PerFragment
+import com.kaloglu.githubchallenge.navigation.FragmentNavigator
 import dagger.Module
 import dagger.Provides
 
@@ -16,8 +17,8 @@ abstract class SearchModule {
         @JvmStatic
         @Provides
         @PerFragment
-        fun presenter(repository: RepoRepository)
-                : SearchContract.Presenter = SearchPresenter(repository)
+        fun presenter(repository: RepoRepository, fragmentNavigator: FragmentNavigator)
+                : SearchContract.Presenter = SearchPresenter(repository,fragmentNavigator)
     }
 
 }

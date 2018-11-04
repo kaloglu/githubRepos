@@ -14,10 +14,14 @@ interface SearchContract {
         val liveData: MutableLiveData<Resource<List<Repo>>>
         val lifeCycleOwner: LifecycleOwner
 
-        fun fillTheRecyclerView(list: List<Repo>)
+        fun showResult(list: List<Repo>)
+        fun showNoResult()
+        fun showError(status: String?)
+        fun showProgress()
     }
 
     interface Presenter : BasePresenter<View> {
         fun repoSearch(query: String): Boolean
+        fun showDetailFragment(item: Repo)
     }
 }

@@ -1,7 +1,6 @@
 package com.kaloglu.githubchallenge.mobileui.search
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.support.design.widget.TextInputEditText
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +14,7 @@ import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
 import com.kaloglu.githubchallenge.mobileui.SimpleItemRecyclerViewAdapter
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
+import com.kaloglu.githubchallenge.utils.observe
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
 import com.kaloglu.githubchallenge.viewobjects.Status
@@ -31,37 +31,28 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
     override fun initUserInterface(rootView: View) {
         adapter = frameLayout.repo_list.setup()
 
-        adapter.onClickItem = {
+        adapter.onClickItem = presenter::showDetailFragment
 
-            //            val fragment = RepoDetailFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(RepoDetailFragment.ARG_ITEM_ID, it.id.toString())
-//                }
-//            }
-//
-//            supportFragmentManager.beginTransaction()
-//                    .replace(baseFrameLayoutId, fragment)
-//                    .commit()
-//
-//            frameLayout.visibility = View.GONE
-        }
-
-        liveData.observe(this, Observer {
+        liveData.observe(lifeCycleOwner) {
             it?.run {
                 when {
                     status == Status.LOADING -> showProgress()
                     status == Status.ERROR -> showError(message)
                     status == Status.SUCCESS && data.isNullOrEmpty() -> showNoResult()
-                    else -> fillTheRecyclerView(data!!)
+                    else -> showResult(data!!)
                 }
             }
-        })
+        }
 
         searchView.setup(this)
 
     }
 
-    override fun fillTheRecyclerView(list: List<Repo>) {
+    override fun onQueryTextSubmit(query: String) = presenter.repoSearch(query)
+
+    override fun onQueryTextChange(newText: String) = newText.length > 2
+
+    override fun showResult(list: List<Repo>) {
         adapter.values = list
         if (adapter.values.isNotEmpty()) {
             frameLayout.visibility = View.VISIBLE
@@ -73,15 +64,11 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
 
     }
 
-    override fun onQueryTextSubmit(query: String) = presenter.repoSearch(query)
+    override fun showNoResult() = Toast.makeText(context, "Sonuç yok", Toast.LENGTH_SHORT).show()
 
-    override fun onQueryTextChange(newText: String) = newText.length > 2
+    override fun showError(status: String?) = Toast.makeText(context, status, Toast.LENGTH_SHORT).show()
 
-    private fun showNoResult() = Toast.makeText(context, "Sonuç yok", Toast.LENGTH_SHORT).show()
-
-    private fun showError(status: String?) = Toast.makeText(context, status, Toast.LENGTH_SHORT).show()
-
-    private fun showProgress() = Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+    override fun showProgress() = Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
 
     private fun RecyclerView.setup(): SimpleItemRecyclerViewAdapter {
         layoutManager = LinearLayoutManager(context)
@@ -109,4 +96,3 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
     }
 
 }
-
