@@ -18,6 +18,7 @@ interface SearchContract {
         fun showNoResult()
         fun showError(status: String?)
         fun showProgress()
+        fun setTitle(name: String)
     }
 
     interface Presenter : BasePresenter<View> {

@@ -48,6 +48,10 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
 
     }
 
+    override fun setTitle(name: String) {
+        activity?.title = name
+    }
+
     override fun onQueryTextSubmit(query: String) = presenter.repoSearch(query)
 
     override fun onQueryTextChange(newText: String) = newText.length > 2

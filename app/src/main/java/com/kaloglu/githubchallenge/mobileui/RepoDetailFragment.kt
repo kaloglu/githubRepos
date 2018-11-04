@@ -6,24 +6,24 @@ import android.widget.Toast
 import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.detail.DetailContract
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
+import com.kaloglu.githubchallenge.mobileui.main.MainActivity
 import com.kaloglu.githubchallenge.utils.observe
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
 import com.kaloglu.githubchallenge.viewobjects.Status
+import kotlinx.android.synthetic.main.fragment_repo_detail.*
 import kotlinx.android.synthetic.main.repo_detail.*
 
-class DetailFragment : BaseMvpFragment<DetailContract.Presenter>(), DetailContract.View {
+class RepoDetailFragment : BaseMvpFragment<DetailContract.Presenter>(), DetailContract.View {
 
     override val liveData: MutableLiveData<Resource<Repo>> = MutableLiveData()
     override val lifeCycleOwner = this
-    override val resourceLayoutId = R.layout.repo_detail
+    override val resourceLayoutId = R.layout.fragment_repo_detail
 
-    var item: Repo? = null
-        set(value) {
-            presenter::showRepoDetail
-        }
+    var repo: Repo? = null
 
     override fun initUserInterface(rootView: View) {
+        (activity as MainActivity).setSupportActionBar(detail_toolbar)
         liveData.observe(lifeCycleOwner) {
             it?.run {
                 when (status) {
@@ -43,11 +43,7 @@ class DetailFragment : BaseMvpFragment<DetailContract.Presenter>(), DetailContra
 
     override fun showProgress() = Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
 
-    companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        const val ARG_ITEM_ID = "item_id"
+    override fun onPresenterAttached() {
+        repo?.also(presenter::showRepoDetail)
     }
 }

@@ -8,7 +8,7 @@ import com.kaloglu.githubchallenge.injection.module.detail.DetailModule
 import com.kaloglu.githubchallenge.injection.module.search.SearchModule
 import com.kaloglu.githubchallenge.injection.scopes.PerActivity
 import com.kaloglu.githubchallenge.injection.scopes.PerFragment
-import com.kaloglu.githubchallenge.mobileui.DetailFragment
+import com.kaloglu.githubchallenge.mobileui.RepoDetailFragment
 import com.kaloglu.githubchallenge.mobileui.base.BaseActivity
 import com.kaloglu.githubchallenge.mobileui.main.MainActivity
 import com.kaloglu.githubchallenge.mobileui.search.SearchFragment
@@ -48,5 +48,5 @@ abstract class MainModule {
 
     @PerFragment
     @ContributesAndroidInjector(modules = [DetailModule::class])
-    abstract fun detail(): DetailFragment
+    abstract fun detail(): RepoDetailFragment
 }
