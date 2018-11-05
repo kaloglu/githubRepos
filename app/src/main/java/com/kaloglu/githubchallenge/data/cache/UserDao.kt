@@ -21,7 +21,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import com.android.example.github.vo.User
+import com.kaloglu.githubchallenge.viewobjects.User
 
 /**
  * Interface for database access for User related operations.

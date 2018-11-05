@@ -18,7 +18,7 @@ package com.kaloglu.githubchallenge.api
 
 import android.arch.lifecycle.LiveData
 import com.kaloglu.githubchallenge.viewobjects.Repo
-import com.android.example.github.vo.User
+import com.kaloglu.githubchallenge.viewobjects.User
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

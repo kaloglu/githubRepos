@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.github.vo
+package com.kaloglu.githubchallenge.viewobjects
 
 import android.arch.persistence.room.Entity
 import com.google.gson.annotations.SerializedName

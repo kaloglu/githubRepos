@@ -21,9 +21,9 @@ class RepoFragment : BaseMvpFragment<RepoContract.Presenter>(), RepoContract.Vie
 
     override fun initUserInterface(rootView: View) {
         textViewUsername.setOnClickListener {
-            val owner = repo?.owner
-            if (textViewUsername.text.isNotEmpty() && owner?.login.toString().isNotEmpty())
-                presenter.showUserFragment(owner!!)
+            val username = repo?.owner?.login.toString()
+            if (textViewUsername.text.isNotEmpty() && username.isNotEmpty())
+                presenter.showUserFragment(username)
         }
     }
 

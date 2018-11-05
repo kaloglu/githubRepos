@@ -17,18 +17,18 @@
 package com.kaloglu.githubchallenge.domain
 
 import android.arch.lifecycle.LiveData
-import com.kaloglu.githubchallenge.viewobjects.Resource
-import com.android.example.github.vo.User
-import com.kaloglu.githubchallenge.injection.scopes.PerApplication
 import com.kaloglu.githubchallenge.api.GithubService
 import com.kaloglu.githubchallenge.data.cache.UserDao
+import com.kaloglu.githubchallenge.injection.scopes.PerApplication
+import com.kaloglu.githubchallenge.viewobjects.Resource
+import com.kaloglu.githubchallenge.viewobjects.User
 import javax.inject.Inject
 
 /**
  * Repository that handles User objects.
  */
 @PerApplication
-class OwnerRepository @Inject constructor(
+class UserRepository @Inject constructor(
         private val appExecutors: AppExecutors,
         private val userDao: UserDao,
         private val githubService: GithubService
