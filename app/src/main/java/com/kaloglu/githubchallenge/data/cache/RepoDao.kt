@@ -23,7 +23,6 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import android.util.SparseIntArray
-import com.kaloglu.githubchallenge.viewobjects.Contributor
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.RepoSearchResult
 import java.util.Collections
@@ -38,9 +37,6 @@ abstract class RepoDao {
     abstract fun insert(vararg repos: Repo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertContributors(contributors: List<Contributor>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertRepos(repositories: List<Repo>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -48,14 +44,6 @@ abstract class RepoDao {
 
     @Query("SELECT * FROM repo WHERE owner_login = :ownerLogin AND name = :name")
     abstract fun load(ownerLogin: String, name: String): LiveData<Repo>
-
-    @Query(
-            value = """
-                    SELECT login, avatarUrl, repoName, repoOwner, contributions FROM contributor
-                    WHERE repoName = :name AND repoOwner = :owner
-                    ORDER BY contributions DESC"""
-    )
-    abstract fun loadContributors(owner: String, name: String): LiveData<List<Contributor>>
 
     @Query(
         """

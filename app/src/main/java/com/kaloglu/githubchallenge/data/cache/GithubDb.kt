@@ -19,7 +19,6 @@ package com.kaloglu.githubchallenge.data.cache
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import com.kaloglu.githubchallenge.viewobjects.Contributor
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.android.example.github.vo.User
 import com.kaloglu.githubchallenge.viewobjects.RepoSearchResult
@@ -31,9 +30,8 @@ import com.kaloglu.githubchallenge.viewobjects.RepoSearchResult
     entities = [
         User::class,
         Repo::class,
-        Contributor::class,
         RepoSearchResult::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class GithubDb : RoomDatabase() {

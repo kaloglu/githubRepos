@@ -26,10 +26,10 @@ import com.google.gson.annotations.SerializedName
  * column.
  */
 data class RepoSearchResponse(
-    @SerializedName("total_count")
-    val total: Int = 0,
-    @SerializedName("items")
-    val items: List<Repo>
+        @SerializedName("total_count")
+        val total: Int = 0,
+        @SerializedName("items")
+        val items: List<Repo>
 ) {
     var nextPage: Int? = null
 }

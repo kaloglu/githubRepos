@@ -17,7 +17,6 @@
 package com.kaloglu.githubchallenge.api
 
 import android.arch.lifecycle.LiveData
-import com.kaloglu.githubchallenge.viewobjects.Contributor
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.android.example.github.vo.User
 import retrofit2.Call
@@ -40,12 +39,6 @@ interface GithubService {
         @Path("owner") owner: String,
         @Path("name") name: String
     ): LiveData<ApiResponse<Repo>>
-
-    @GET("repos/{owner}/{name}/contributors")
-    fun getContributors(
-        @Path("owner") owner: String,
-        @Path("name") name: String
-    ): LiveData<ApiResponse<List<Contributor>>>
 
     @GET("search/repositories")
     fun searchRepos(@Query("q") query: String): LiveData<ApiResponse<RepoSearchResponse>>

@@ -28,7 +28,7 @@ import javax.inject.Inject
  * Repository that handles User objects.
  */
 @PerApplication
-class UserRepository @Inject constructor(
+class OwnerRepository @Inject constructor(
         private val appExecutors: AppExecutors,
         private val userDao: UserDao,
         private val githubService: GithubService

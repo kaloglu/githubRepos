@@ -26,31 +26,41 @@ import com.google.gson.annotations.SerializedName
  * vs id is not.
  */
 @Entity(
-    indices = [
-        Index("id"),
-        Index("owner_login")],
-    primaryKeys = ["name", "owner_login"]
+        indices = [
+            Index("id"),
+            Index("owner_login")],
+        primaryKeys = ["name", "owner_login"]
 )
 data class Repo(
         val id: Int,
         @field:SerializedName("name")
-    val name: String,
+        val name: String,
         @field:SerializedName("full_name")
-    val fullName: String,
+        val fullName: String,
         @field:SerializedName("description")
-    val description: String?,
+        val description: String?,
         @field:SerializedName("owner")
-    @field:Embedded(prefix = "owner_")
-    val owner: Owner,
+        @field:Embedded(prefix = "owner_")
+        val owner: Owner,
         @field:SerializedName("stargazers_count")
-    val stars: Int
+        val stars: Int = 0,
+        @field:SerializedName("avatar_url")
+        val avatar: String? = "",
+        @field:SerializedName("default_branch")
+        val branch: String? = "",
+        @field:SerializedName("language")
+        val lang: String? = "",
+        @field:SerializedName("forks_count")
+        val forks: Int = 0
 ) {
 
     data class Owner(
-        @field:SerializedName("login")
-        val login: String,
-        @field:SerializedName("url")
-        val url: String?
+            @field:SerializedName("login")
+            val login: String,
+            @field:SerializedName("url")
+            val url: String?,
+            @field:SerializedName("avatar_url")
+            val avatar: String? = ""
     )
 
     companion object {

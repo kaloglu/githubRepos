@@ -46,4 +46,3 @@ dependencies {
     addDependencies(dependencies, appDependencies)
     implementation 'com.android.support:design:28.0.0'
 }
-

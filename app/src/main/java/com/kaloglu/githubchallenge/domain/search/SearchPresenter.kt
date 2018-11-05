@@ -3,7 +3,7 @@ package com.kaloglu.githubchallenge.domain.search
 import android.arch.lifecycle.Observer
 import com.kaloglu.githubchallenge.domain.RepoRepository
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
-import com.kaloglu.githubchallenge.mobileui.RepoDetailFragment
+import com.kaloglu.githubchallenge.mobileui.repo.RepoFragment
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseAbstractPresenter
 import com.kaloglu.githubchallenge.navigation.FragmentNavigator
 import com.kaloglu.githubchallenge.viewobjects.Repo
@@ -18,23 +18,21 @@ class SearchPresenter
     override fun showDetailFragment(item: Repo) {
         getView().setTitle(item.name)
         fragmentNavigator.showFragment(
-                RepoDetailFragment().apply {
+                RepoFragment().apply {
                     repo = item
                 }
         )
+
+        getView().hideKeyboard()
     }
 
     override fun repoSearch(query: String): Boolean {
-        if (query.length > 2) {
-            repository.search(query)
-                    .observe(
-                            getView().lifeCycleOwner,
-                            Observer(getView().liveData::postValue)
-                    )
-            return true
-        }
-
-        return false
+        repository.search(query)
+                .observe(
+                        getView().lifeCycleOwner,
+                        Observer(getView().liveData::postValue)
+                )
+        return true
     }
 
 }

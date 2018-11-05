@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.annotation.StringRes
 import android.view.View
-import android.widget.Toolbar
 import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.main.MainContract
 import com.kaloglu.githubchallenge.mobileui.base.BaseFragment
@@ -23,9 +22,9 @@ class MainActivity : BaseMvpActivity<MainContract.Presenter>(),
     override val containedFragment: BaseFragment? = SearchFragment()
 
     override fun initUserInterface() {
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-//
+        setSupportActionBar(toolbar)
+        toolbar.title = title
+
 //        setNavigationOnClick {
 //            onBackPressed()
 //        }

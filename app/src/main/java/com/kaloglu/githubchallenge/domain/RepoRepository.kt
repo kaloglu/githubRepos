@@ -19,7 +19,6 @@ package com.kaloglu.githubchallenge.domain
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
-import com.kaloglu.githubchallenge.viewobjects.Contributor
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
 import com.kaloglu.githubchallenge.injection.scopes.PerApplication
@@ -89,38 +88,6 @@ class RepoRepository @Inject constructor(
                     owner = owner,
                     name = name
             )
-        }.asLiveData()
-    }
-
-    fun loadContributors(owner: String, name: String): LiveData<Resource<List<Contributor>>> {
-        return object : NetworkBoundResource<List<Contributor>, List<Contributor>>(appExecutors) {
-            override fun saveCallResult(item: List<Contributor>) {
-                item.forEach {
-                    it.repoName = name
-                    it.repoOwner = owner
-                }
-                db.runInTransaction {
-                    repoDao.createRepoIfNotExists(
-                            Repo(
-                                    id = Repo.UNKNOWN_ID,
-                                    name = name,
-                                    fullName = "$owner/$name",
-                                    description = "",
-                                    owner = Repo.Owner(owner, null),
-                                    stars = 0
-                            )
-                    )
-                    repoDao.insertContributors(item)
-                }
-            }
-
-            override fun shouldFetch(data: List<Contributor>?): Boolean {
-                return data == null || data.isEmpty()
-            }
-
-            override fun loadFromDb() = repoDao.loadContributors(owner, name)
-
-            override fun createCall() = githubService.getContributors(owner, name)
         }.asLiveData()
     }
 

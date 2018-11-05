@@ -14,6 +14,7 @@ import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
 import com.kaloglu.githubchallenge.mobileui.SimpleItemRecyclerViewAdapter
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
+import com.kaloglu.githubchallenge.utils.KeyboardUtil
 import com.kaloglu.githubchallenge.utils.observe
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
@@ -47,6 +48,8 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
         searchView.setup(this)
 
     }
+
+    override fun hideKeyboard() = KeyboardUtil.hideKeyboard(view!!)
 
     override fun setTitle(name: String) {
         activity?.title = name

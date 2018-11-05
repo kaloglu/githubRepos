@@ -1,56 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:ignore="MergeRootFrame">
+    android:padding="16dp">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/detail_toolbar">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/repo_detail_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/repo_detail" />
-    </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/repo_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@+id/repo_detail_container"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="repo: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/profile" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/repo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintStart_toEndOf="@id/repo_lbl"
+        tools:text="repo" />
+
+    <TextView
+        android:id="@+id/fork_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="forks: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/repo_lbl"
+        app:layout_constraintTop_toBottomOf="@id/repo_lbl" />
+
+    <TextView
+        android:id="@+id/fork_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        app:layout_constraintStart_toEndOf="@id/fork_lbl"
+        app:layout_constraintTop_toBottomOf="@id/repo_lbl" />
+
+    <TextView
+        android:id="@+id/star_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stars: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/fork_lbl"
+        app:layout_constraintTop_toBottomOf="@id/fork_lbl" />
+
+    <TextView
+        android:id="@+id/star_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        app:layout_constraintStart_toEndOf="@id/star_lbl"
+        app:layout_constraintTop_toBottomOf="@id/fork_lbl" />
+
+    <TextView
+        android:id="@+id/username_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/profile"
+        app:layout_constraintStart_toStartOf="@id/fork_lbl" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItemSmall"
+        android:textColor="@android:color/holo_blue_light"
+        app:layout_constraintBaseline_toBaselineOf="@id/username_lbl"
+        app:layout_constraintStart_toEndOf="@id/username_lbl"
+        tools:text="username" />
+
+    <TextView
+        android:id="@+id/lang_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="lang: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/profile"
+        app:layout_constraintTop_toBottomOf="@id/profile" />
+
+    <TextView
+        android:id="@+id/lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="java"
+        android:textAllCaps="true"
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        app:layout_constraintBaseline_toBaselineOf="@id/lang_lbl"
+        app:layout_constraintStart_toEndOf="@id/lang_lbl" />
+
+    <TextView
+        android:id="@+id/branch_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="branch: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/lang_lbl"
+        app:layout_constraintTop_toBottomOf="@id/lang_lbl" />
+
+    <TextView
+        android:id="@+id/branch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        app:layout_constraintBaseline_toBaselineOf="@id/branch_lbl"
+        app:layout_constraintStart_toEndOf="@id/branch_lbl" />
+
+
+    <TextView
+        android:id="@+id/id_description_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="description: "
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/branch_lbl"
+        app:layout_constraintTop_toBottomOf="@id/branch_lbl" />
+
+    <TextView
+        android:id="@+id/id_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+        app:layout_constraintBaseline_toBaselineOf="@id/id_description_lbl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/id_description_lbl" />
+
+</android.support.constraint.ConstraintLayout>
+

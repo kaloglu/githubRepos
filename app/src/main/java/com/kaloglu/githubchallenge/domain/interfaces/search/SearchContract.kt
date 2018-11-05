@@ -19,6 +19,7 @@ interface SearchContract {
         fun showError(status: String?)
         fun showProgress()
         fun setTitle(name: String)
+        fun hideKeyboard()
     }
 
     interface Presenter : BasePresenter<View> {

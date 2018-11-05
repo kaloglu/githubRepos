@@ -1,8 +1,7 @@
 package com.kaloglu.githubchallenge.injection.module.detail
 
-import com.kaloglu.githubchallenge.domain.RepoRepository
 import com.kaloglu.githubchallenge.domain.detail.DetailPresenter
-import com.kaloglu.githubchallenge.domain.interfaces.detail.DetailContract
+import com.kaloglu.githubchallenge.domain.interfaces.detail.RepoContract
 import com.kaloglu.githubchallenge.injection.scopes.PerFragment
 import com.kaloglu.githubchallenge.navigation.FragmentNavigator
 import dagger.Module
@@ -17,8 +16,8 @@ abstract class DetailModule {
         @JvmStatic
         @Provides
         @PerFragment
-        fun presenter(repository: RepoRepository, fragmentNavigator: FragmentNavigator)
-                : DetailContract.Presenter = DetailPresenter(repository, fragmentNavigator)
+        fun presenter(fragmentNavigator: FragmentNavigator)
+                : RepoContract.Presenter = DetailPresenter(fragmentNavigator)
     }
 
 }
