@@ -1,4 +1,4 @@
-package com.kaloglu.githubchallenge.domain.interfaces.detail
+package com.kaloglu.githubchallenge.domain.interfaces.repo
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData

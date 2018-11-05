@@ -4,10 +4,11 @@ import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import android.widget.Toast
 import com.kaloglu.githubchallenge.R
-import com.kaloglu.githubchallenge.domain.interfaces.detail.RepoContract
+import com.kaloglu.githubchallenge.domain.interfaces.repo.RepoContract
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_repo_detail.*
 
 class RepoFragment : BaseMvpFragment<RepoContract.Presenter>(), RepoContract.View {
@@ -19,9 +20,9 @@ class RepoFragment : BaseMvpFragment<RepoContract.Presenter>(), RepoContract.Vie
     var repo: Repo? = null
 
     override fun initUserInterface(rootView: View) {
-        username.setOnClickListener {
+        textViewUsername.setOnClickListener {
             val owner = repo?.owner
-            if (username.text.isNotEmpty() && owner?.login.toString().isNotEmpty())
+            if (textViewUsername.text.isNotEmpty() && owner?.login.toString().isNotEmpty())
                 presenter.showUserFragment(owner!!)
         }
     }
@@ -32,14 +33,16 @@ class RepoFragment : BaseMvpFragment<RepoContract.Presenter>(), RepoContract.Vie
 
     override fun showResult(repo: Repo) {
         repo.run {
-
-            repo.text = name
-            username.text = owner.login
-            fork_count.text = forks.toString()
-            star_count.text = stars.toString()
-            lang.text = lang.toString()
-            branch.text = branch.toString()
-            id_description.text = description.toString()
+            Picasso.get()
+                    .load(repo.owner.avatar)
+                    .into(imageViewProfile)
+            textViewRepo.text = name
+            textViewUsername.text = owner.login
+            textViewForkCount.text = forks.toString()
+            textViewStarCount.text = stars.toString()
+            textViewLang.text = lang.toString()
+            textViewBranch.text = branch.toString()
+            textViewDescription.text = description.toString()
         }
     }
 

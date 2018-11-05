@@ -44,8 +44,6 @@ data class Repo(
         val owner: Owner,
         @field:SerializedName("stargazers_count")
         val stars: Int = 0,
-        @field:SerializedName("avatar_url")
-        val avatar: String? = "",
         @field:SerializedName("default_branch")
         val branch: String? = "",
         @field:SerializedName("language")

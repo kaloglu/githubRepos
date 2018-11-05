@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:padding="16dp">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:fitsSystemWindows="true">
 
     <ImageView
-        android:id="@+id/profile"
+        android:id="@+id/imageViewProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/repo_lbl"
+        android:id="@+id/labelRepo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,138 +27,138 @@
         android:text="repo: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/profile" />
+        app:layout_constraintStart_toEndOf="@id/imageViewProfile" />
 
     <TextView
-        android:id="@+id/repo"
+        android:id="@+id/textViewRepo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toEndOf="@id/repo_lbl"
+        app:layout_constraintStart_toEndOf="@id/labelRepo"
         tools:text="repo" />
 
     <TextView
-        android:id="@+id/fork_lbl"
+        android:id="@+id/labelFork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="forks: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/repo_lbl"
-        app:layout_constraintTop_toBottomOf="@id/repo_lbl" />
+        app:layout_constraintStart_toStartOf="@id/labelRepo"
+        app:layout_constraintTop_toBottomOf="@id/labelRepo" />
 
     <TextView
-        android:id="@+id/fork_count"
+        android:id="@+id/textViewForkCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
-        app:layout_constraintStart_toEndOf="@id/fork_lbl"
-        app:layout_constraintTop_toBottomOf="@id/repo_lbl" />
+        app:layout_constraintStart_toEndOf="@id/labelFork"
+        app:layout_constraintTop_toBottomOf="@id/labelRepo" />
 
     <TextView
-        android:id="@+id/star_lbl"
+        android:id="@+id/labelStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="stars: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/fork_lbl"
-        app:layout_constraintTop_toBottomOf="@id/fork_lbl" />
+        app:layout_constraintStart_toStartOf="@id/labelFork"
+        app:layout_constraintTop_toBottomOf="@id/labelFork" />
 
     <TextView
-        android:id="@+id/star_count"
+        android:id="@+id/textViewStarCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
-        app:layout_constraintStart_toEndOf="@id/star_lbl"
-        app:layout_constraintTop_toBottomOf="@id/fork_lbl" />
+        app:layout_constraintStart_toEndOf="@id/labelStar"
+        app:layout_constraintTop_toBottomOf="@id/labelFork" />
 
     <TextView
-        android:id="@+id/username_lbl"
+        android:id="@+id/labelUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/profile"
-        app:layout_constraintStart_toStartOf="@id/fork_lbl" />
+        app:layout_constraintBottom_toBottomOf="@id/imageViewProfile"
+        app:layout_constraintStart_toStartOf="@id/labelFork" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItemSmall"
         android:textColor="@android:color/holo_blue_light"
-        app:layout_constraintBaseline_toBaselineOf="@id/username_lbl"
-        app:layout_constraintStart_toEndOf="@id/username_lbl"
+        app:layout_constraintBaseline_toBaselineOf="@id/labelUsername"
+        app:layout_constraintStart_toEndOf="@id/labelUsername"
         tools:text="username" />
 
     <TextView
-        android:id="@+id/lang_lbl"
+        android:id="@+id/labelLang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="lang: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/profile"
-        app:layout_constraintTop_toBottomOf="@id/profile" />
+        app:layout_constraintStart_toStartOf="@id/imageViewProfile"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProfile" />
 
     <TextView
-        android:id="@+id/lang"
+        android:id="@+id/textViewLang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="java"
         android:textAllCaps="true"
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
-        app:layout_constraintBaseline_toBaselineOf="@id/lang_lbl"
-        app:layout_constraintStart_toEndOf="@id/lang_lbl" />
+        app:layout_constraintBaseline_toBaselineOf="@id/labelLang"
+        app:layout_constraintStart_toEndOf="@id/labelLang" />
 
     <TextView
-        android:id="@+id/branch_lbl"
+        android:id="@+id/labelBranch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="branch: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/lang_lbl"
-        app:layout_constraintTop_toBottomOf="@id/lang_lbl" />
+        app:layout_constraintStart_toStartOf="@id/labelLang"
+        app:layout_constraintTop_toBottomOf="@id/labelLang" />
 
     <TextView
-        android:id="@+id/branch"
+        android:id="@+id/textViewBranch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text=""
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
-        app:layout_constraintBaseline_toBaselineOf="@id/branch_lbl"
-        app:layout_constraintStart_toEndOf="@id/branch_lbl" />
+        app:layout_constraintBaseline_toBaselineOf="@id/labelBranch"
+        app:layout_constraintStart_toEndOf="@id/labelBranch" />
 
 
     <TextView
-        android:id="@+id/id_description_lbl"
+        android:id="@+id/labelDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="description: "
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/branch_lbl"
-        app:layout_constraintTop_toBottomOf="@id/branch_lbl" />
+        app:layout_constraintStart_toStartOf="@id/labelBranch"
+        app:layout_constraintTop_toBottomOf="@id/labelBranch" />
 
     <TextView
-        android:id="@+id/id_description"
+        android:id="@+id/textViewDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text=""
         android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
-        app:layout_constraintBaseline_toBaselineOf="@id/id_description_lbl"
+        app:layout_constraintBaseline_toBaselineOf="@id/labelDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/id_description_lbl" />
+        app:layout_constraintStart_toEndOf="@id/labelDescription" />
 
 </android.support.constraint.ConstraintLayout>
 

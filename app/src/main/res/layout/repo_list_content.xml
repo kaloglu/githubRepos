@@ -8,20 +8,20 @@
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
+        android:id="@+id/imageViewProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/repo"
+        android:id="@+id/textViewRepo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toEndOf="@id/profile"
+        app:layout_constraintStart_toEndOf="@id/imageViewProfile"
         tools:text="reponame" />
 
     <TextView
@@ -33,10 +33,10 @@
         android:textAppearance="?attr/textAppearanceListItemSmall"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile" />
+        app:layout_constraintStart_toEndOf="@id/imageViewProfile" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItemSmall"

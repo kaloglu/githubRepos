@@ -50,6 +50,8 @@ def versions = [
 
         timber          : '4.5.1',
 
+        picasso         : '2.71828',
+
         // Test
         robolectric     : '3.4.2',
         junit           : '4.12',
@@ -101,6 +103,8 @@ def libraries = [
         lifeCycleCompiler  : "android.arch.lifecycle:compiler:$versions.lifeCycle",
 
         timber             : "com.jakewharton.timber:timber:$versions.timber",
+
+        picasso            : "com.squareup.picasso:picasso:$versions.picasso",
 
         //Test
         assertj            : "org.assertj:assertj-core:$versions.assertJ",
@@ -165,6 +169,7 @@ ext.appDependencies = [
         addDependency('kapt', libraries.lifeCycleCompiler),
 
         addDependency('implementation', libraries.timber),
+        addDependency('implementation', libraries.picasso),
 
         //TODO: kullanılmazsa silinecek
         addDependency('implementation', libraries.javaxInject),

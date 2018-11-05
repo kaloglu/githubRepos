@@ -31,7 +31,7 @@ import com.kaloglu.githubchallenge.viewobjects.RepoSearchResult
         User::class,
         Repo::class,
         RepoSearchResult::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class GithubDb : RoomDatabase() {
