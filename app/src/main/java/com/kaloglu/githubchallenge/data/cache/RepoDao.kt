@@ -25,6 +25,7 @@ import android.arch.persistence.room.Query
 import android.util.SparseIntArray
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.RepoSearchResult
+import com.kaloglu.githubchallenge.viewobjects.UserRepo
 import java.util.Collections
 
 /**
@@ -51,7 +52,7 @@ abstract class RepoDao {
         WHERE owner_login = :owner
         ORDER BY stars DESC"""
     )
-    abstract fun loadRepositories(owner: String): LiveData<List<Repo>>
+    abstract fun loadRepositories(owner: String): LiveData<List<UserRepo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(result: RepoSearchResult)

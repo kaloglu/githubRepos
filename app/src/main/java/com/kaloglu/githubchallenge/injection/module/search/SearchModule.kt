@@ -1,6 +1,6 @@
 package com.kaloglu.githubchallenge.injection.module.search
 
-import com.kaloglu.githubchallenge.domain.RepoRepository
+import com.kaloglu.githubchallenge.domain.repo.RepoRepository
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
 import com.kaloglu.githubchallenge.domain.search.SearchPresenter
 import com.kaloglu.githubchallenge.injection.scopes.PerFragment

@@ -19,6 +19,7 @@ package com.kaloglu.githubchallenge.api
 import android.arch.lifecycle.LiveData
 import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.User
+import com.kaloglu.githubchallenge.viewobjects.UserRepo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -32,7 +33,7 @@ interface GithubService {
     fun getUser(@Path("login") login: String): LiveData<ApiResponse<User>>
 
     @GET("users/{login}/repos")
-    fun getRepos(@Path("login") login: String): LiveData<ApiResponse<List<Repo>>>
+    fun getRepos(@Path("login") login: String): LiveData<ApiResponse<List<UserRepo>>>
 
     @GET("repos/{owner}/{name}")
     fun getRepo(

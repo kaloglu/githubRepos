@@ -20,7 +20,7 @@ class RepoFragment : BaseMvpFragment<RepoContract.Presenter>(), RepoContract.Vie
     var repo: Repo? = null
 
     override fun initUserInterface(rootView: View) {
-        textViewUsername.setOnClickListener {
+        imageViewProfile.setOnClickListener {
             val username = repo?.owner?.login.toString()
             if (textViewUsername.text.isNotEmpty() && username.isNotEmpty())
                 presenter.showUserFragment(username)

@@ -31,12 +31,12 @@ abstract class MainModule {
         @PerActivity
         fun presenter(): MainContract.Presenter = MainPresenter()
 
-        @JvmStatic
-        @Provides
-        @PerActivity
-        fun fragmentNavigator(fragmentManager: FragmentManager): FragmentNavigator {
-            return FragmentNavigator(fragmentManager)
-        }
+//        @JvmStatic
+//        @Provides
+//        @PerActivity
+//        fun fragmentNavigator(fragmentManager: FragmentManager): FragmentNavigator {
+//            return FragmentNavigator(fragmentManager)
+//        }
     }
 
     @Binds

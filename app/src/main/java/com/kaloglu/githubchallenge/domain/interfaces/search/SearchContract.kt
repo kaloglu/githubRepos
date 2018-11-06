@@ -24,6 +24,7 @@ interface SearchContract {
 
     interface Presenter : BasePresenter<View> {
         fun repoSearch(query: String): Boolean
-        fun showDetailFragment(item: Repo)
+        fun showRepoFragment(repo: Repo)
+        fun showUserFragment(login: String)
     }
 }

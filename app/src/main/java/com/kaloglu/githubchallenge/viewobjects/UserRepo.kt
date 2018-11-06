@@ -17,51 +17,28 @@
 package com.kaloglu.githubchallenge.viewobjects
 
 import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Index
 import com.google.gson.annotations.SerializedName
 
-/**
- * Using name/owner_login as primary key instead of id since name/owner_login is always available
- * vs id is not.
- */
-@Entity(
-        indices = [
-            Index("id"),
-            Index("owner_login")],
-        primaryKeys = ["name", "owner_login"]
-)
-data class Repo(
-        val id: Int,
+open class UserRepo(
+        open val id: Int,
         @field:SerializedName("name")
-        val name: String,
+        open val name: String,
         @field:SerializedName("full_name")
-        val fullName: String,
+        open val fullName: String,
         @field:SerializedName("description")
-        val description: String?,
+        open val description: String?,
         @field:SerializedName("owner")
         @field:Embedded(prefix = "owner_")
-        val owner: Owner,
+        open val owner: Owner,
         @field:SerializedName("stargazers_count")
-        val stars: Int = 0,
+        open val stars: Int = 0,
         @field:SerializedName("default_branch")
-        val branch: String? = "",
+        open val branch: String? = "",
         @field:SerializedName("language")
-        val lang: String? = "",
+        open val lang: String? = "",
         @field:SerializedName("forks_count")
-        val forks: Int = 0
+        open val forks: Int = 0
 ) {
-    constructor(userRepos: UserRepo) : this(
-            userRepos.id,
-            userRepos.name,
-            userRepos.fullName,
-            userRepos.description,
-            Repo.Owner(userRepos.owner),
-            userRepos.stars,
-            userRepos.branch,
-            userRepos.lang,
-            userRepos.forks
-    )
 
     data class Owner(
             @field:SerializedName("login")
@@ -70,9 +47,7 @@ data class Repo(
             val url: String?,
             @field:SerializedName("avatar_url")
             val avatar: String? = ""
-    ) {
-        constructor(owner: UserRepo.Owner) : this(owner.login, owner.url, owner.avatar)
-    }
+    )
 
     companion object {
         const val UNKNOWN_ID = -1

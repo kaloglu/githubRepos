@@ -62,8 +62,10 @@ class FetchNextSearchPageTask constructor(
 
                     ids.addAll(apiResponse.body.items.map { it.id })
                     val merged = RepoSearchResult(
-                        query, ids,
-                        apiResponse.body.total, apiResponse.nextPage
+                            query,
+                            ids,
+                            apiResponse.body.total,
+                            apiResponse.nextPage
                     )
                     try {
                         db.beginTransaction()
@@ -75,12 +77,8 @@ class FetchNextSearchPageTask constructor(
                     }
                     Resource.success(apiResponse.nextPage != null)
                 }
-                is ApiEmptyResponse -> {
-                    Resource.success(false)
-                }
-                is ApiErrorResponse -> {
-                    Resource.error(apiResponse.errorMessage, true)
-                }
+                is ApiEmptyResponse -> Resource.success(false)
+                is ApiErrorResponse -> Resource.error(apiResponse.errorMessage, true)
             }
 
         } catch (e: IOException) {

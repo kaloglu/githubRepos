@@ -1,52 +1,74 @@
 package com.kaloglu.githubchallenge.mobileui.user
 
 import android.arch.lifecycle.MutableLiveData
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Toast
-import com.kaloglu.githubchallenge.viewobjects.User
 import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.user.UserContract
+import com.kaloglu.githubchallenge.mobileui.ItemAdapter
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
+import com.kaloglu.githubchallenge.utils.observe
+import com.kaloglu.githubchallenge.viewobjects.Repo
 import com.kaloglu.githubchallenge.viewobjects.Resource
+import com.kaloglu.githubchallenge.viewobjects.Status
+import com.kaloglu.githubchallenge.viewobjects.UserRepo
+import kotlinx.android.synthetic.main.fragment_user_detail.*
+import kotlinx.android.synthetic.main.repo_list.view.*
 
 class UserFragment : BaseMvpFragment<UserContract.Presenter>(), UserContract.View {
-
-    override val liveData: MutableLiveData<Resource<User>> = MutableLiveData()
-    override val lifeCycleOwner = this
     override val resourceLayoutId = R.layout.fragment_user_detail
+    override val liveData = MutableLiveData<Resource<List<UserRepo>>>()
+    override val lifeCycleOwner = this
 
     var username: String = ""
 
+    private lateinit var adapter: ItemAdapter
+
     override fun initUserInterface(rootView: View) {
-//        username.setOnClickListener {
-//            val user = user?.user
-//            if (username.text.isNotEmpty() && user?.login.toString().isNotEmpty())
-//                presenter.showUserFragment(user!!)
-//        }
+        adapter = frameLayout.repo_list.setup()
+
+        adapter.onClickItem = { presenter.showRepoFragment(it as UserRepo) }
+        adapter.onClickProfile = { presenter.showUserFragment((it as Repo).owner.login) }
+
+        liveData.observe(lifeCycleOwner) {
+            it?.run {
+                when {
+                    status == Status.LOADING -> showProgress()
+                    status == Status.ERROR -> showError(message)
+                    status == Status.SUCCESS && data.isNullOrEmpty() -> showNoResult()
+                    else -> showResult(data!!)
+                }
+            }
+        }
+
     }
 
     override fun setTitle(username: String) {
         activity?.title = username
     }
 
-    override fun showResult(user: User) {
-        user.run {
-
-//            user.text = name
-//            username.text = user.login
-//            fork_count.text = forks.toString()
-//            star_count.text = stars.toString()
-//            lang.text = lang.toString()
-//            branch.text = branch.toString()
-//            id_description.text = description.toString()
-        }
+    override fun showResult(repos: List<UserRepo>) {
+        adapter.values = repos
     }
+
+    override fun showNoResult() = Toast.makeText(context, "Sonuç yok", Toast.LENGTH_SHORT).show()
 
     override fun showError(status: String?) = Toast.makeText(context, status, Toast.LENGTH_SHORT).show()
 
     override fun showProgress() = Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
 
-    override fun onPresenterAttached() {
-        presenter::showUserDetail
+    private fun RecyclerView.setup(): ItemAdapter {
+        layoutManager = LinearLayoutManager(context)
+        adapter = ItemAdapter()
+
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        return adapter as ItemAdapter
     }
+
+    override fun onPresenterAttached() = presenter.showUser(username)
+
 }

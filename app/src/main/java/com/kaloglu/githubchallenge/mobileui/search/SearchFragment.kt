@@ -12,7 +12,7 @@ import android.view.View
 import android.widget.Toast
 import com.kaloglu.githubchallenge.R
 import com.kaloglu.githubchallenge.domain.interfaces.search.SearchContract
-import com.kaloglu.githubchallenge.mobileui.SimpleItemRecyclerViewAdapter
+import com.kaloglu.githubchallenge.mobileui.ItemAdapter
 import com.kaloglu.githubchallenge.mobileui.base.mvp.BaseMvpFragment
 import com.kaloglu.githubchallenge.utils.KeyboardUtil
 import com.kaloglu.githubchallenge.utils.observe
@@ -27,12 +27,13 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
     override val liveData = MutableLiveData<Resource<List<Repo>>>()
     override val lifeCycleOwner = this
 
-    private lateinit var adapter: SimpleItemRecyclerViewAdapter
+    private lateinit var adapter: ItemAdapter
 
     override fun initUserInterface(rootView: View) {
         adapter = frameLayout.repo_list.setup()
 
-        adapter.onClickItem = presenter::showDetailFragment
+        adapter.onClickItem = { presenter.showRepoFragment(it as Repo) }
+        adapter.onClickProfile = { presenter.showUserFragment((it as Repo).owner.login) }
 
         liveData.observe(lifeCycleOwner) {
             it?.run {
@@ -77,13 +78,13 @@ class SearchFragment : BaseMvpFragment<SearchContract.Presenter>(), SearchContra
 
     override fun showProgress() = Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
 
-    private fun RecyclerView.setup(): SimpleItemRecyclerViewAdapter {
+    private fun RecyclerView.setup(): ItemAdapter {
         layoutManager = LinearLayoutManager(context)
-        adapter = SimpleItemRecyclerViewAdapter()
+        adapter = ItemAdapter()
 
         addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        return adapter as SimpleItemRecyclerViewAdapter
+        return adapter as ItemAdapter
     }
 
     private fun TextInputEditText.setup(onQueryTextListener: SearchView.OnQueryTextListener) {

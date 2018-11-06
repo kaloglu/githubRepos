@@ -1,5 +1,6 @@
 package com.kaloglu.githubchallenge.injection.module.user
 
+import com.kaloglu.githubchallenge.domain.repo.RepoRepository
 import com.kaloglu.githubchallenge.domain.interfaces.user.UserContract
 import com.kaloglu.githubchallenge.domain.user.UserPresenter
 import com.kaloglu.githubchallenge.injection.scopes.PerFragment
@@ -16,8 +17,8 @@ abstract class UserModule {
         @JvmStatic
         @Provides
         @PerFragment
-        fun presenter(fragmentNavigator: FragmentNavigator)
-                : UserContract.Presenter = UserPresenter(fragmentNavigator)
+        fun presenter(repository: RepoRepository, fragmentNavigator: FragmentNavigator)
+                : UserContract.Presenter = UserPresenter(repository, fragmentNavigator)
     }
 
 }

@@ -4,25 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:alpha="0.7"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewRepo"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/userLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintStart_toEndOf="@id/imageViewProfile"
-        tools:text="reponame" />
+        android:padding="@dimen/text_margin"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-    <ImageView
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceSearchResultTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageViewProfile"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="username" />
+
+        <TextView
+            android:id="@+id/textViewUrl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageViewProfile"
+            app:layout_constraintTop_toBottomOf="@id/textViewUsername"
+            tools:text="url" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/repoLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:alpha="0.6"
+        android:background="@android:color/holo_orange_light"
+        android:padding="@dimen/text_margin"
+        app:layout_constraintTop_toBottomOf="@id/userLayout">
+
+        <TextView
+            android:id="@+id/textViewRepo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textStyle="bold"
+            tools:text="reponame" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            app:layout_constraintTop_toBottomOf="@id/textViewRepo"
+            tools:text="description" />
+
+        <TextView
+            android:id="@+id/labelForks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginTop="10dp"
+            android:text="forks: "
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
+
+        <TextView
+            android:id="@+id/textViewForks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            app:layout_constraintStart_toEndOf="@id/labelForks"
+            app:layout_constraintTop_toTopOf="@id/labelForks"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/labelStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:text="stars: "
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/textViewForks"
+            app:layout_constraintStart_toEndOf="@id/textViewForks" />
+
+        <TextView
+            android:id="@+id/textViewStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            app:layout_constraintStart_toEndOf="@id/labelStar"
+            app:layout_constraintTop_toTopOf="@id/labelStar"
+            tools:text="0" />
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>
